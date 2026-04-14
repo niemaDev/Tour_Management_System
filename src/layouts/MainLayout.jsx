@@ -1,0 +1,23 @@
+import React from 'react';
+import { Outlet, Link } from 'react-router-dom';
+import Navbar from '../components/common/Navbar';
+import Footer from '../components/common/Footer';
+
+const MainLayout = () => {
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
+      {/* Use ONLY the Navbar component to avoid conflicts 
+         Make sure your Navbar.jsx doesn't have another <Router> inside it!
+      */}
+      <Navbar />
+
+      <main className="flex-grow ">
+        <Outlet />
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default MainLayout;
