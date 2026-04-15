@@ -28,7 +28,7 @@ const Home = () => {
             Discover the Land of Origins
           </h1>
           <p className="text-lg md:text-xl mb-10 opacity-90 font-light max-w-xl">
-            Experience authentic Ethiopian adventures with expert guides, from ancient churches to breathtaking mountain ranges.
+            Experience authentic Ethiopia adventures with expert guides, from ancient history to breathtaking mountain ranges.
           </p>
           <div className="flex flex-wrap gap-4">
             <button className="bg-burnt-orange hover:brightness-110 px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition transform hover:scale-105 shadow-xl cursor-pointer">

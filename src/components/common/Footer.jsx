@@ -3,15 +3,6 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="bg-[#2D1B14] text-white overflow-hidden">
-      {/* CTA Section */}
-      <div className="py-24 text-center px-8 border-b border-white/5">
-        <h2 className="text-5xl font-serif font-bold mb-6">Ready to Start Your Adventure?</h2>
-        <p className="text-lg opacity-60 mb-10 max-w-2xl mx-auto">Join thousands of travelers who have experienced the magic of Ethiopia with our expert-guided tours.</p>
-        <button className="bg-[#B95B2A] hover:bg-[#a04a20] px-12 py-4 rounded-xl font-bold text-lg transition shadow-2xl">
-          Book Your Journey →
-        </button>
-      </div>
-
       {/* Main Footer Links */}
       <div className="max-w-7xl mx-auto py-20 px-8 grid grid-cols-1 md:grid-cols-4 gap-16 text-left">
         <FooterGroup title="About" links={["Our Story", "Team", "Careers"]} />
