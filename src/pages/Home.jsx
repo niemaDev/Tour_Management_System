@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { MapPin, ShieldCheck, Star, ArrowRight, Clock } from 'lucide-react';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   const tours = [
     { id: 1, title: "Simien Mountains Trek", location: "Amhara", duration: "7 Days", price: "45,000", img: "https://images.unsplash.com/photo-1548231016-16328328706b?q=80&w=800" },
     { id: 2, title: "Safari Adventure", location: "Omo Valley", duration: "5 Days", price: "38,000", img: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=800" },
@@ -31,12 +33,18 @@ const Home = () => {
             Experience authentic Ethiopia adventures with expert guides, from ancient history to breathtaking mountain ranges.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-burnt-orange hover:brightness-110 px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition transform hover:scale-105 shadow-xl cursor-pointer">
+            <Link
+            to="/tours"
+
+             className="bg-burnt-orange hover:brightness-110 px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition transform hover:scale-105 shadow-xl cursor-pointer">
               Explore Tours <ArrowRight size={20} />
-            </button>
-            <button className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition cursor-pointer">
+            </Link>
+            <Link
+              to="/login"
+              className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition cursor-pointer"
+            >
               Sign In
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -95,7 +103,21 @@ const Home = () => {
             </div>
           ))}
         </div>
+        <div className="flex justify-center w-full my-12  bg-white/50"> 
+  <Link 
+    to="/tours" 
+    className="group flex items-center gap-3 bg-[#B95B2A] text-white px-10 py-5 rounded-2xl font-bold text-xl   hover:scale-105 transition-all "
+  >
+    View All Tours
+    {/* The Arrow Icon */}
+    <ArrowRight 
+      size={24} 
+      className="group-hover:translate-x-2 transition-transform duration-300" 
+    />
+  </Link>
+</div>
       </section>
+
 
       {/* FINAL CTA SECTION */}
       <section className="bg-coffee py-28 px-8 text-center text-white relative">

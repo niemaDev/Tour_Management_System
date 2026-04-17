@@ -5,7 +5,7 @@ import Footer from '../components/common/Footer';
 
 const MainLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
+    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900 overflow-hidden">
       {/* Use ONLY the Navbar component to avoid conflicts 
          Make sure your Navbar.jsx doesn't have another <Router> inside it!
       */}
