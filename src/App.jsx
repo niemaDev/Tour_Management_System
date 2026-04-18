@@ -18,6 +18,7 @@ import BookingPage from "./pages/BookingPage";
 
 function App() {
   return (
+    <div className="min-h-screen w-full bg-[#2D1B14] text-white">
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
@@ -44,6 +45,7 @@ function App() {
           <Route path="reports" element={<Reports />} />
          </Route>
     </Routes>
+    </div>
   );
 }
 

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Compass } from 'lucide-react';
 
 const Navbar = () => {
-  return (
-    <nav className="m-0 bg-[#2D1B14] text-white py-4 px-8 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-md">
+  return ( 
+    <nav className="m-0 bg-[#2D1B14] text-white py-4 px-8 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-md ">
       <Link to="/" className="flex items-center gap-3">
         <div className="m-0 bg-[#B95B2A] p-2 rounded-full">
           <Compass size={24} className="text-white" />
@@ -23,6 +23,7 @@ const Navbar = () => {
         </button>
       </div>
     </nav>
+    
   );
 };
 

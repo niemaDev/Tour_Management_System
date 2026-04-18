@@ -11,4 +11,22 @@
 
 
 }
-
+@layer base {
+  html,
+  body {
+    /* Prevent bouncing effect on iOS/Android */
+    overscroll-behavior: none;
+    /* Optional: Fix white flash if your app is dark mode */
+    @apply bg-white; 
+    /* Or set to your theme color, e.g., @apply bg-gray-950; */
+    
+    /* Remove default margins */
+    margin: 0;
+    padding: 0;
+    
+    /* Ensure the body fills the screen */
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+}

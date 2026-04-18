@@ -3,9 +3,11 @@ import {
   Clock, Users, MapPin, Check, X, 
   ArrowRight, Calendar, User, Star 
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
+
 
 const TourDetails = () => {
+  const {id} = useParams();
   const navigate = useNavigate();
   const itinerary = [
     { day: 1, title: "Arrival in Gondar", desc: "Meet your guide and transfer to hotel. Evening briefing and welcome dinner." },
@@ -16,7 +18,17 @@ const TourDetails = () => {
     { day: 6, title: "Ambiko to Debark", desc: "Final day of trekking. Return to Debark and transfer to Gondar." },
     { day: 7, title: "Departure", desc: "Morning city tour of Gondar's castles and churches. Transfer to airport." },
   ];
-
+   const tourData = {
+    title: "Simien Mountains Trek",
+    price: "45,000",
+    location: "Amhara Region",
+    duration: "7 Days / 6 Nights",
+    groupSize: "Max 12 People",
+    itinerary: [
+      { day: 1, title: "Arrival in Gondar", desc: "Meet your guide and transfer to hotel. Evening briefing and welcome dinner." },
+      { day: 2, title: "Gondar to Sankaber Camp", desc: "Drive to Debark and enter Simien Mountains National Park. Trek to Sankaber (3,250m)." }
+    ]
+  };
   return (
     <div className="bg-[#FAF9F6] min-h-screen font-sans text-[#2D1B14]">
       {/* 1. Hero Section - Matches Screenshot (392) */}
@@ -31,9 +43,9 @@ const TourDetails = () => {
               <span className="text-sm font-bold">4.9 (87 reviews)</span>
             </div>
           </div>
-          
+          <span className="bg-white/20 px-3 py-1 rounded-full text-sm mb-4 inline-block">Amhara • 4.9 (87 reviews)</span>
           <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 leading-tight">
-            Simien Mountains Trek
+           {tourData.title}
           </h1>
           <p className="max-w-3xl text-lg md:text-xl opacity-80 leading-relaxed font-light">
             Experience the breathtaking beauty of the Simien Mountains, often called the 'Roof of Africa.' 

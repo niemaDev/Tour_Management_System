@@ -16,11 +16,10 @@ const Home = () => {
       {/* HERO SECTION */}
       <section className="relative h-[90vh] flex items-center px-8 md:px-20 text-white overflow-hidden bg-coffee">
         <div className="absolute inset-0 z-0">
-          <img 
-           src="https://images.unsplash.com/photo-1523805081446-ed9a768297a1?auto=format&fit=crop&q=80&w=1920" 
-  className="w-full h-full object-cover opacity-50"
-  alt="Ethiopian Landscape"
-          />
+          <div className="bg-[url('/land.jpg')] bg-cover bg-center h-screen">
+  {/* Content */}
+</div>
+
           {/* V4 Gradient Overlay - Ensures text is readable even if image is bright */}
           <div className="absolute inset-0 bg-linear-to-r from-coffee/90 via-coffee/40 to-transparent" />
         </div>
@@ -95,9 +94,14 @@ const Home = () => {
                   <div>
                     <p className="text-burnt-orange font-extrabold text-xl">{tour.price} ETB</p>
                   </div>
-                  <div className="text-burnt-orange transform group-hover:translate-x-2 transition duration-300">
-                    <ArrowRight size={24} />
-                  </div>
+                  
+                  <Link 
+          to={`/tour/${tour.id}`} 
+          className="text-burnt-orange transform group-hover:translate-x-2 transition duration-300 p-2 hover:bg-orange-50 rounded-full cursor-pointer"
+        >
+          <ArrowRight size={24} />
+        </Link>
+                  
                 </div>
               </div>
             </div>
