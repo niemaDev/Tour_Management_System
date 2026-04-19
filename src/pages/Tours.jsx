@@ -8,22 +8,22 @@ const Tours = () => {
   const [priceRange, setPriceRange] = useState(100000);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const tours = [
-    { id: 1, name: "Simien Mountains Trek", region: "Amhara", duration: "7 Days", price: "45,000", type: "Trekking", rating: "4.9", img: "https://images.unsplash.com/photo-1548100840-05830064971c?q=80&w=2072&auto=format&fit=crop" },
-    { id: 2, name: "Omo Valley Safari", region: "Southern Nations", duration: "5 Days", price: "38,000", type: "Safari", rating: "4.8", img: "https://images.unsplash.com/photo-1516422741124-97eb73f3a696?q=80&w=2071&auto=format&fit=crop" },
-    { id: 3, name: "Historic Northern Route", region: "Tigray", duration: "10 Days", price: "52,000", type: "Cultural", rating: "4.7", img: "https://images.unsplash.com/photo-1523805081730-6144a7783a65?q=80&w=2069&auto=format&fit=crop" },
-    { id: 4, name: "Lalibela Churches Tour", region: "Amhara", duration: "4 Days", price: "28,000", type: "Cultural", rating: "5.0", img: "https://images.unsplash.com/photo-1599577180570-74034870da3e?q=80&w=2072&auto=format&fit=crop" },
-    { id: 5, name: "Danakil Depression", region: "Afar", duration: "6 Days", price: "42,000", type: "Adventure", rating: "4.7", img: "https://images.unsplash.com/photo-1502481851512-e9e2529bbbf9?q=80&w=2069&auto=format&fit=crop" },
-    { id: 6, name: "Bale Mountains Wildlife", region: "Oromia", duration: "5 Days", price: "35,000", type: "Wildlife", rating: "4.8", img: "https://images.unsplash.com/photo-1544621289-5430c507119e?q=80&w=2070&auto=format&fit=crop" },
-  ];
+ const tours = [
+  { id: 1, title: "Simien Mountains Trek", location: "Amhara", duration: "7 Days", price: "45,000", type: "Trekking", rating: "4.9", img: "/city.jpg" },
+  { id: 2, title: "Omo Valley Safari", location: "Southern Nations", duration: "5 Days", price: "38,000", type: "Safari", rating: "4.8", img: "https://images.unsplash.com/photo-1516422741124-97eb73f3a696?q=80&w=2071" },
+  { id: 3, title: "Historic Northern Route", location: "Tigray", duration: "10 Days", price: "52,000", type: "Cultural", rating: "4.7", img: "https://images.unsplash.com/photo-1523805081730-6144a7783a65?q=80&w=2069" },
+  { id: 4, title: "Lalibela Churches Tour", location: "Amhara", duration: "4 Days", price: "28,000", type: "Cultural", rating: "5.0", img: "https://images.unsplash.com/photo-1599577180570-74034870da3e?q=80&w=2072" },
+  { id: 5, title: "Danakil Depression", location: "Afar", duration: "6 Days", price: "42,000", type: "Adventure", rating: "4.7", img: "https://images.unsplash.com/photo-1502481851512-e9e2529bbbf9?q=80&w=2069" },
+  { id: 6, title: "Bale Mountains Wildlife", location: "Oromia", duration: "5 Days", price: "35,000", type: "Wildlife", rating: "4.8", img: "https://images.unsplash.com/photo-1544621289-5430c507119e?q=80&w=2070" },
+];
 
   // Logic to filter the tours based on the current state
   const filteredTours = tours.filter((tour) => {
-    const matchesRegion = region === 'All Regions' || tour.region === region;
+    const matchesRegion = region === 'All Regions' || tour.location === region;
     const matchesActivity = activity === 'All Activities' || tour.type === activity;
-    const tourPrice = parseInt(tour.price.replace(',', ''));
+    const tourPrice = parseInt(tour.price.replace(/,/g, ''));
     const matchesPrice = tourPrice <= priceRange;
-    const matchesSearch = tour.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = tour.title.toLowerCase().includes(searchQuery.toLowerCase());
 
     return matchesRegion && matchesActivity && matchesPrice && matchesSearch;
   });
@@ -123,7 +123,10 @@ const Tours = () => {
               filteredTours.map((tour) => (
                 <div key={tour.id} className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm border border-gray-100 group hover:shadow-xl transition-all duration-500">
                   <div className="relative h-64 overflow-hidden">
-                    <img src={tour.img} alt={tour.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                    <img src={tour.img} alt={tour.title}
+                     className="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
+                     onError={(e) => { e.target.src = 'https://via.placeholder.com/800x600?text=Tour+Image'; }}
+                     />
                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1">
                       <span className="text-orange-400">★</span>
                       <span className="text-xs font-bold text-coffee">{tour.rating}</span>
@@ -138,7 +141,7 @@ const Tours = () => {
                     <p className="text-gray-400 text-sm mb-6">Explore Ethiopia's dramatic landscapes.</p>
                     
                     <div className="flex items-center gap-6 text-gray-400 text-sm mb-8">
-                      <div className="flex items-center gap-2"><MapPin size={16} /> {tour.region}</div>
+                      <div className="flex items-center gap-2"><MapPin size={16} /> {tour.location}</div>
                       <div className="flex items-center gap-2"><Clock size={16} /> {tour.duration}</div>
                     </div>
 

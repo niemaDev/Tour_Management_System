@@ -5,12 +5,12 @@ import {Link, useNavigate} from 'react-router-dom';
 const Home = () => {
   const navigate = useNavigate();
   const tours = [
-    { id: 1, title: "Simien Mountains Trek", location: "Amhara", duration: "7 Days", price: "45,000", img: "https://images.unsplash.com/photo-1548231016-16328328706b?q=80&w=800" },
-    { id: 2, title: "Safari Adventure", location: "Omo Valley", duration: "5 Days", price: "38,000", img: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=800" },
-    { id: 3, title: "Historic Route", location: "Tigray", duration: "10 Days", price: "52,000", img: "https://images.unsplash.com/photo-1615560410406-896f6437d0c3?q=80&w=800" },
-    { id: 4, title: "Lalibela Churches", location: "Lalibela", duration: "4 Days", price: "28,000", img: "https://images.unsplash.com/photo-1565022803306-056158d629f6?q=80&w=800" },
+    // Ensure these image paths match files actually inside your 'public' folder
+    { id: 1, title: "Simien Mountains Trek", location: "Amhara", duration: "7 Days", price: "45,000", img: "/terr.jpg" },
+    { id: 2, title: "Safari Adventure", location: "Omo Valley", duration: "5 Days", price: "38,000", img: "/city.jpg" }, 
+    { id: 3, title: "Historic Route", location: "Tigray", duration: "10 Days", price: "52,000", img: "/bdr.jpg" },
+    { id: 4, title: "Lalibela Churches", location: "Lalibela", duration: "4 Days", price: "28,000", img: "/camel.jpg" },
   ];
-
   return (
     <div className="bg-cream font-sans">
       {/* HERO SECTION */}
@@ -32,12 +32,7 @@ const Home = () => {
             Experience authentic Ethiopia adventures with expert guides, from ancient history to breathtaking mountain ranges.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link
-            to="/tours"
-
-             className="bg-burnt-orange hover:brightness-110 px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition transform hover:scale-105 shadow-xl cursor-pointer">
-              Explore Tours <ArrowRight size={20} />
-            </Link>
+            
             <Link
               to="/login"
               className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition cursor-pointer"
@@ -70,57 +65,74 @@ const Home = () => {
       </section>
 
       {/* FEATURED DESTINATIONS GRID */}
-      <section className="py-20 px-8 bg-white/50">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-coffee mb-4">Featured Destinations</h2>
-          <p className="text-gray-500 text-lg">Explore our most popular tour packages</p>
+     <section className="py-20 px-8 bg-white/50">
+  <div className="text-center mb-16">
+    <h2 className="text-4xl md:text-5xl font-serif font-bold text-coffee mb-4">Featured Destinations</h2>
+    <p className="text-gray-500 text-lg">Explore our most popular tour packages</p>
+  </div>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 container mx-auto">
+    {tours.map((tour) => (
+      <div 
+        key={tour.id} 
+        className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 group cursor-pointer border border-gray-100"
+      >
+        {/* IMAGE CONTAINER */}
+        <div className="relative h-60 overflow-hidden">
+          <img 
+            src={tour.img} 
+            alt={tour.title}
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
+          />
+          {/* LOCATION BADGE */}
+          <span className="absolute top-4 right-4 bg-burnt-orange text-white px-4 py-1 rounded-full text-xs font-bold">
+            {tour.location}
+          </span>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 container mx-auto">
-          {tours.map(tour => (
-            <div key={tour.id} className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 group cursor-pointer border border-gray-100">
-              <div className="relative h-60 overflow-hidden">
-                <img src={tour.img} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt={tour.title} />
-                <span className="absolute top-4 right-4 bg-burnt-orange text-white px-4 py-1 rounded-full text-xs font-bold">
-                  {tour.location}
-                </span>
-              </div>
-              <div className="p-7">
-                <h3 className="text-xl font-bold text-coffee mb-3">{tour.title}</h3>
-                <div className="flex items-center text-gray-400 text-sm mb-6">
-                  <Clock size={16} className="mr-2" /> <span>{tour.duration}</span>
-                </div>
-                <div className="flex justify-between items-end">
-                  <div>
-                    <p className="text-burnt-orange font-extrabold text-xl">{tour.price} ETB</p>
-                  </div>
-                  
-                  <Link 
-          to={`/tour/${tour.id}`} 
-          className="text-burnt-orange transform group-hover:translate-x-2 transition duration-300 p-2 hover:bg-orange-50 rounded-full cursor-pointer"
-        >
-          <ArrowRight size={24} />
-        </Link>
-                  
-                </div>
-              </div>
+
+        {/* CONTENT SECTION */}
+        <div className="p-7">
+          <h3 className="text-xl font-bold text-coffee mb-3">{tour.title}</h3>
+          
+          <div className="flex items-center text-gray-400 text-sm mb-6">
+            <Clock size={16} className="mr-2" /> 
+            <span>{tour.duration}</span>
+          </div>
+
+          <div className="flex justify-between items-end">
+            <div>
+              <p className="text-burnt-orange font-extrabold text-xl">
+                {tour.price} ETB
+              </p>
             </div>
-          ))}
+
+            {/* NAVIGATION ARROW */}
+            <Link
+              to={`/tour/${tour.id}`}
+              className="text-burnt-orange transform group-hover:translate-x-2 transition duration-300 p-2 hover:bg-orange-50 rounded-full cursor-pointer"
+            >
+              <ArrowRight size={24} />
+            </Link>
+          </div>
         </div>
-        <div className="flex justify-center w-full my-12  bg-white/50"> 
-  <Link 
-    to="/tours" 
-    className="group flex items-center gap-3 bg-[#B95B2A] text-white px-10 py-5 rounded-2xl font-bold text-xl   hover:scale-105 transition-all "
-  >
-    View All Tours
-    {/* The Arrow Icon */}
-    <ArrowRight 
-      size={24} 
-      className="group-hover:translate-x-2 transition-transform duration-300" 
-    />
-  </Link>
-</div>
-      </section>
+      </div>
+    ))}
+  </div>
+
+  {/* VIEW ALL BUTTON */}
+  <div className="flex justify-center w-full my-12 bg-white/50">
+    <Link
+      to="/tours"
+      className="group flex items-center gap-3 bg-[#B95B2A] text-white px-10 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition-all"
+    >
+      View All Tours
+      <ArrowRight
+        size={24}
+        className="group-hover:translate-x-2 transition-transform duration-300"
+      />
+    </Link>
+  </div>
+</section>
 
 
       {/* FINAL CTA SECTION */}
@@ -130,9 +142,14 @@ const Home = () => {
           <p className="opacity-70 text-lg mb-12 font-light">
             Join thousands of travelers who have experienced the magic of Ethiopia with our expert-guided tours.
           </p>
-          <button className="bg-burnt-orange hover:brightness-110 px-12 py-5 rounded-xl font-bold text-lg transition-all shadow-2xl hover:-translate-y-1 cursor-pointer">
-            Book Your Journey →
-          </button>
+          <button>
+            <Link
+            to="/tours"
+             className="group flex items-center gap-3 bg-[#B95B2A] text-white px-10 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition-all">
+              Book Your Journey <ArrowRight size={20} />
+            </Link>
+            </button>
+          
         </div>
       </section>
     </div>

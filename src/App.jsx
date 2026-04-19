@@ -19,35 +19,35 @@ import BookingPage from "./pages/BookingPage";
 function App() {
   return (
     <div className="min-h-screen w-full bg-[#2D1B14] text-white">
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-       
-        <Route path="destinations" element={<Catalog />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        {/*<Route path="catalog" element={<Catalog />} />
-        <Route path="/" element={<Catalog />} />*/}
-        <Route path="tour/:id" element={<TourDetails />} />
-        <Route path="booking" element={<BookingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/tours" element={<Tours />} />
+      <Routes>
+        {/* Main Layout wrapper */}
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="destinations" element={<Catalog />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="tour/:id" element={<TourDetails />} />
+          <Route path="booking" element={<BookingPage />} />
+          
+          {/* REMOVED leading slashes here to prevent path conflicts */}
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Register />} /> {/* Matches your Link to="/signup" */}
+          <Route path="tours" element={<Tours />} />
 
-        {/* Admin Routes */ }
-      <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-          <Route path="admin/tours" element={<ManageTours />} />
-          <Route path="admin/reports" element={<Reports />} />
+          {/* Admin Routes nested in MainLayout */}
+          <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+            <Route path="admin/tours" element={<ManageTours />} />
+            <Route path="admin/reports" element={<Reports />} />
+          </Route>
         </Route>
-        
-      </Route>
-      <Route path="/admin" element={<AdminLayout />}>
+
+        {/* Separate Admin Layout */}
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="reports" element={<Reports />} />
-         </Route>
-    </Routes>
+        </Route>
+      </Routes>
     </div>
   );
 }
-
 export default App;
 
