@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  ChevronDown, 
+  ChevronDown,
+   LayoutDashboard,
+    MapPin,
+     Globe,
   User, 
   LogIn, 
   Facebook, 
   Linkedin, 
   Youtube, 
   Instagram, 
-  MessageCircle 
+  MessageCircle
 } from 'lucide-react';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+    const isAdmin = true;
   // Destinations matching the reference style
   const destinations = ["Amhara", "Oromia", "Tigray", "Afar", "Southern Nation", "More"];
 
@@ -85,14 +88,14 @@ const Navbar = () => {
         </div>
 
         {/* Action Button (Main sign up button) */}
-        <div className="hidden sm:block">
+        {/*<div className="hidden sm:block">
           <Link 
             to="/signup" 
             className="bg-[#2D1B14] text-white px-6 py-2.5 rounded-md text-[11px] font-bold uppercase tracking-widest hover:bg-[#B95B2A] transition-all shadow-md active:scale-95"
           >
             Sign Up
           </Link>
-        </div>
+        </div>*/}
       </div>
     </nav>
   );

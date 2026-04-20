@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="bg-cream font-sans">
       {/* HERO SECTION */}
-      <section className="relative h-[90vh] flex items-center px-8 md:px-20 text-white overflow-hidden bg-coffee">
+      <section className="relative min-h-[calc(100vh-214px)] flex items-center px-8 md:px-20 text-white overflow-hidden bg-coffee">
         <div className="absolute inset-0 z-0">
           <div className="bg-[url('/land.jpg')] bg-cover bg-center h-screen">
   {/* Content */}
@@ -31,7 +31,7 @@ const Home = () => {
           <p className="text-lg md:text-xl mb-10 opacity-90 font-light max-w-xl">
             Experience authentic Ethiopia adventures with expert guides, from ancient history to breathtaking mountain ranges.
           </p>
-          <div className="flex flex-wrap gap-4">
+          {/*<div className="flex flex-wrap gap-4">
             
             <Link
               to="/login"
@@ -40,6 +40,7 @@ const Home = () => {
               Sign In
             </Link>
           </div>
+          */}
         </div>
       </section>
 
@@ -65,7 +66,8 @@ const Home = () => {
       </section>
 
       {/* FEATURED DESTINATIONS GRID */}
-     <section className="py-20 px-8 bg-white/50">
+     <section className="
+     py-20 px-8 bg-white/50">
   <div className="text-center mb-16">
     <h2 className="text-4xl md:text-5xl font-serif font-bold text-coffee mb-4">Featured Destinations</h2>
     <p className="text-gray-500 text-lg">Explore our most popular tour packages</p>
@@ -78,7 +80,8 @@ const Home = () => {
         className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 group cursor-pointer border border-gray-100"
       >
         {/* IMAGE CONTAINER */}
-        <div className="relative h-60 overflow-hidden">
+        <div className="relative h-60 overflow-hidden
+        w-full h-[calc(100vh-114px)] mt-[114px] ">
           <img 
             src={tour.img} 
             alt={tour.title}
