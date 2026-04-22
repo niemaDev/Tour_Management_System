@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Search, MapPin, Clock, ArrowRight, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Tours = () => {
   const [region, setRegion] = useState('All Regions');
   const [activity, setActivity] = useState('All Activities');
   const [priceRange, setPriceRange] = useState(100000);
   const [searchQuery, setSearchQuery] = useState('');
-
  const tours = [
   { id: 1, title: "Simien Mountains Trek", location: "Amhara", duration: "7 Days", price: "45,000", type: "Trekking", rating: "4.9", img: "/city.jpg" },
   { id: 2, title: "Omo Valley Safari", location: "Southern Nations", duration: "5 Days", price: "38,000", type: "Safari", rating: "4.8", img: "https://images.unsplash.com/photo-1516422741124-97eb73f3a696?q=80&w=2071" },
@@ -16,34 +14,27 @@ const Tours = () => {
   { id: 5, title: "Danakil Depression", location: "Afar", duration: "6 Days", price: "42,000", type: "Adventure", rating: "4.7", img: "https://images.unsplash.com/photo-1502481851512-e9e2529bbbf9?q=80&w=2069" },
   { id: 6, title: "Bale Mountains Wildlife", location: "Oromia", duration: "5 Days", price: "35,000", type: "Wildlife", rating: "4.8", img: "https://images.unsplash.com/photo-1544621289-5430c507119e?q=80&w=2070" },
 ];
-
-  // Logic to filter the tours based on the current state
   const filteredTours = tours.filter((tour) => {
     const matchesRegion = region === 'All Regions' || tour.location === region;
     const matchesActivity = activity === 'All Activities' || tour.type === activity;
     const tourPrice = parseInt(tour.price.replace(/,/g, ''));
     const matchesPrice = tourPrice <= priceRange;
     const matchesSearch = tour.title.toLowerCase().includes(searchQuery.toLowerCase());
-
     return matchesRegion && matchesActivity && matchesPrice && matchesSearch;
   });
-
   return (
     <div className="min-h-screen bg-[#FDFBF9]">
       <div className="bg-[#B95B2A] pt-32 pb-20 px-6 text-center">
         <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-4">Explore Our Tours</h1>
         <p className="text-white/80 text-lg font-medium">Discover unique experiences across Ethiopia</p>
       </div>
-
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-8">
         <aside className="w-full lg:w-72 space-y-8">
           <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
             <div className="flex items-center gap-2 text-[#B95B2A] font-bold uppercase tracking-wider text-xs mb-6">
               <Filter size={16} /> Filters
             </div>
-            
             <div className="space-y-6">
-              {/* FIXED: Added value and onChange to Region select */}
               <div>
                 <label className="block text-sm font-bold text-coffee mb-3">Region</label>
                 <select 
@@ -59,16 +50,13 @@ const Tours = () => {
                   <option>Southern Nations</option>
                 </select>
               </div>
-
-              {/* FIXED: Added value and onChange to Activity select */}
               <div>
                 <label className="block text-sm font-bold text-coffee mb-3">Activity Type</label>
                 <select 
                   value={activity} 
                   onChange={(e) => setActivity(e.target.value)}
                   className="w-full p-3 bg-gray-50 border border-gray-100 rounded-xl outline-none text-sm font-medium"
-                >
-                  <option>All Activities</option>
+                ><option>All Activities</option>
                   <option>Trekking</option>
                   <option>Safari</option>
                   <option>Adventure</option>
@@ -76,7 +64,6 @@ const Tours = () => {
                   <option>Wildlife</option>
                 </select>
               </div>
-
               <div>
                 <div className="flex justify-between mb-3">
                   <label className="text-sm font-bold text-coffee">Price Range</label>
@@ -88,20 +75,14 @@ const Tours = () => {
                   value={priceRange} 
                   onChange={(e) => setPriceRange(e.target.value)}
                   className="w-full accent-[#B95B2A] cursor-pointer" 
-                />
-              </div>
-            </div>
-          </div>
-
+                /></div></div></div>
           <div className="bg-orange-50 p-8 rounded-[2rem] border border-orange-100">
             <h4 className="font-bold text-coffee mb-2">Need Help?</h4>
             <p className="text-sm text-gray-500 mb-4">Our travel experts are ready to assist you</p>
             <button className="text-[#B95B2A] font-bold text-sm hover:underline">Contact Support →</button>
           </div>
         </aside>
-
         <main className="flex-1">
-          {/* FIXED: Added value and onChange to Search input */}
           <div className="relative mb-8">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-300" size={24} />
             <input 
@@ -110,15 +91,11 @@ const Tours = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-16 pr-8 py-5 bg-white border border-gray-100 rounded-[2rem] shadow-sm outline-none focus:ring-2 focus:ring-[#B95B2A]/10 transition text-lg"
-            />
-          </div>
-
+            /></div>
           <p className="text-gray-400 font-bold mb-6">
             Showing {filteredTours.length} tours
           </p>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* FIXED: Changed tours.map to filteredTours.map */}
             {filteredTours.length > 0 ? (
               filteredTours.map((tour) => (
                 <div key={tour.id} className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm border border-gray-100 group hover:shadow-xl transition-all duration-500">
@@ -169,5 +146,4 @@ const Tours = () => {
     </div>
   );
 };
-
 export default Tours;

@@ -1,21 +1,15 @@
-import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 
 const ProtectedRoute = ({ allowedRoles }) => {
-  const { user } = useAuth();
+  const userRole = localStorage.getItem('userRole');
 
-  if (!user) {
-    // Redirect to login if not authenticated
-    return <Navigate to="/login" replace />;
+  // If the role in storage matches one of the allowed roles, show the page
+  if (allowedRoles.includes(userRole)) {
+    return <Outlet />;
   }
 
-  if (allowedRoles && !allowedRoles.includes(user.role)) {
-    // Redirect to home if they don't have the right permissions (e.g., Tourist trying to see Admin)
-    return <Navigate to="/" replace />;
-  }
-
-  return <Outlet />;
+  // Otherwise, send them back to login
+  return <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

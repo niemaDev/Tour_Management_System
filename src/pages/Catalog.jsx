@@ -9,10 +9,10 @@ const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const tours = [
-    { id: 1, title: "Simien Mountains Trek", desc: "Explore Ethiopia's dramatic highland landscapes", location: "Amhara", duration: "7 Days", price: "45,000", tag: "Trekking", rating: 4.9, img: "https://images.unsplash.com/photo-1548231016-16328328706b?q=80&w=800" },
-    { id: 2, title: "Omo Valley Safari", desc: "Encounter diverse wildlife and indigenous tribes", location: "Southern Nations", duration: "5 Days", price: "38,000", tag: "Safari", rating: 4.8, img: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=800" },
-    { id: 3, title: "Historic Northern Route", desc: "Visit ancient rock-hewn churches and historical sites", location: "Tigray", duration: "10 Days", price: "52,000", tag: "Cultural", rating: 5.0, img: "https://images.unsplash.com/photo-1615560410406-896f6437d0c3?q=80&w=800" },
-    { id: 4, title: "Lalibela Churches Tour", desc: "Marvel at the 12th-century rock-cut churches", location: "Amhara", duration: "4 Days", price: "28,000", tag: "Cultural", rating: 4.9, img: "https://images.unsplash.com/photo-1565022803306-056158d629f6?q=80&w=800" },
+    { id: 1, title: "Simien Mountains Trek", desc: "Explore Ethiopia's dramatic highland landscapes", location: "Amhara", duration: "7 Days", price: "45,000", tag: "Trekking", rating: 4.9, img: "/colored.jpg" },
+    { id: 2, title: "Omo Valley Safari", desc: "Encounter diverse wildlife and indigenous tribes", location: "Southern Nations", duration: "5 Days", price: "38,000", tag: "Safari", rating: 4.8, img: "/evening.jpg" },
+    { id: 3, title: "Historic Northern Route", desc: "Visit ancient rock-hewn churches and historical sites", location: "Tigray", duration: "10 Days", price: "52,000", tag: "Cultural", rating: 5.0, img: "geter.jpg" },
+    { id: 4, title: "Lalibela Churches Tour", desc: "Marvel at the 12th-century rock-cut churches", location: "Amhara", duration: "4 Days", price: "28,000", tag: "Cultural", rating: 4.9, img: "gonder.jpg" },
   ];
 
   const filteredTours = tours.filter(tour => {

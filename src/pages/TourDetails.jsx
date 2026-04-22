@@ -4,8 +4,6 @@ import {
   ArrowRight, Calendar, User, Star 
 } from 'lucide-react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
-
-
 const TourDetails = () => {
   const {id} = useParams();
   const navigate = useNavigate();
@@ -52,13 +50,9 @@ const TourDetails = () => {
             This UNESCO World Heritage site offers dramatic landscapes, unique wildlife, and unforgettable trekking experiences.
           </p>
         </div>
-        
-        {/* Subtle decorative background element */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none" />
       </section>
-
-      {/* 2. Overlapping Info Cards - Matches Screenshot (392) */}
-      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 -mt-20 relative z-20">
+      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 -mt--3 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:w-[calc(66.66%+1.5rem)]">
           {[
             { icon: <Clock className="text-[#B95B2A]" />, label: "Duration", val: "7 Days / 6 Nights" },
@@ -77,18 +71,13 @@ const TourDetails = () => {
           ))}
         </div>
       </div>
-
-      {/* 3. Main Content Grid - Matches Screenshot (391) */}
       <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 py-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
-        
-        {/* LEFT COLUMN: Itinerary & Inclusions */}
         <div className="lg:col-span-8 space-y-16">
           <section>
             <h2 className="text-3xl font-serif font-bold mb-10 relative inline-block">
               Day by Day Itinerary
               <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#B95B2A] rounded-full" />
             </h2>
-            
             <div className="space-y-6">
               {itinerary.map((step) => (
                 <div key={step.day} className="group bg-white p-8 rounded-[2.5rem] border border-gray-100 flex gap-8 items-start shadow-sm hover:shadow-md transition-all">
@@ -103,8 +92,6 @@ const TourDetails = () => {
               ))}
             </div>
           </section>
-
-          {/* Inclusions - Matches Screenshot (388) */}
           <section className="grid md:grid-cols-2 gap-10 pt-10">
             <div className="bg-white p-10 rounded-[3rem] border border-gray-100">
               <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
@@ -125,7 +112,6 @@ const TourDetails = () => {
                 ))}
               </ul>
             </div>
-            
             <div className="bg-white p-10 rounded-[3rem] border border-gray-100">
               <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
                 <X className="text-red-500" /> Not Included
@@ -148,8 +134,6 @@ const TourDetails = () => {
             </div>
           </section>
         </div>
-
-        {/* RIGHT COLUMN: Sticky Booking Card - Matches Screenshot (391) */}
         <aside className="lg:col-span-4">
           <div className="bg-white p-10 rounded-[3rem] shadow-2xl border border-gray-50 sticky top-28 transform transition-all">
             <div className="mb-10">
@@ -159,7 +143,6 @@ const TourDetails = () => {
                 <span className="text-sm font-medium text-gray-400">/ person</span>
               </div>
             </div>
-
             <div className="space-y-8 mb-10">
               <div className="relative">
                 <label className="text-[10px] font-black text-gray-400 uppercase flex items-center gap-2 mb-3 tracking-widest">
@@ -171,7 +154,6 @@ const TourDetails = () => {
                   className="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-orange-100 focus:bg-white transition-all outline-none font-medium text-gray-600" 
                 />
               </div>
-              
               <div className="relative">
                 <label className="text-[10px] font-black text-gray-400 uppercase flex items-center gap-2 mb-3 tracking-widest">
                   <User size={14} className="text-[#B95B2A]"/> Number of Travelers
@@ -186,26 +168,20 @@ const TourDetails = () => {
                 </div>
               </div>
             </div>
-
             <button 
       onClick={() => navigate('/booking')} 
       className="w-full bg-[#B95B2A] ..."
-    >
-      Book This Tour 
+    > Book This Tour 
       <ArrowRight />
-    </button>
-            
-            <div className="mt-8 text-center">
+    </button><div className="mt-8 text-center">
               <p className="text-sm text-gray-400 font-medium">
                 Have questions? <button className="text-[#B95B2A] font-bold hover:underline">Contact us</button>
               </p>
             </div>
           </div>
         </aside>
-
       </div>
     </div>
   );
 };
-
 export default TourDetails;
