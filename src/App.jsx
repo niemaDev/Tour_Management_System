@@ -11,6 +11,7 @@ import Tours from "./pages/Tours";
 import TourDetails from "./pages/TourDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Contact from "./pages/Contact";
 
 // User/Admin Pages
 import Dashboard from "./pages/Dashboard";
@@ -31,6 +32,7 @@ function App() {
           <Route path="tours" element={<Tours />} />
           <Route path="tour/:id" element={<TourDetails />} />
           <Route path="login" element={<Login />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="signup" element={<Register />} />
           
           {/* Protected Customer Routes */}

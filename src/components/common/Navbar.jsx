@@ -11,7 +11,9 @@ import {
   Youtube, 
   Instagram, 
   MessageCircle,
-  Briefcase // Icon for Customer Dashboard
+  Briefcase, // Icon for Customer Dashboard
+  HelpCircle,
+  UserPlus
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -53,7 +55,7 @@ const Navbar = () => {
             {!isLoggedIn ? (
               <>
                 <Link to="/login" className="flex items-center gap-1.5 hover:text-[#B95B2A] transition">
-                  <LogIn size={14} /> Login
+                  <LogIn size={14} /> Sing In
                 </Link>
                 <Link to="/signup" className="flex items-center gap-1.5 hover:text-[#B95B2A] transition">
                   <User size={14} /> Sign Up
@@ -75,13 +77,15 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-8 h-[74px] flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <span className="text-2xl font-black tracking-tighter uppercase text-[#2D1B14]">
-            Ethio<span className="text-[#B95B2A]">Path</span>
+            Habesha<span className="text-[#B95B2A]">Tour</span>
           </span>
         </Link>
 
         <div className="flex items-center gap-8 font-bold text-[#2D1B14] uppercase text-xs tracking-[0.2em]">
           <Link to="/" className="hover:text-[#B95B2A] transition">Home</Link>
-          <Link to="/tours" className="hover:text-[#B95B2A] transition">Search Tours</Link>
+          <Link to="/tours" className="hover:text-[#B95B2A] transition">About</Link>
+        
+            <Link to="/tours" className="hover:text-[#B95B2A] transition">Search Tours</Link>
 
           {/* DROPDOWN: Destinations */}
           <div 
@@ -106,8 +110,11 @@ const Navbar = () => {
                 ))}
               </div>
             )}
+             
           </div>
-
+            <div className="flex items-center gap-8 font-bold text-[#2D1B14] uppercase text-xs tracking-[0.2em]">
+              <Link to="/contact" className="hover:text-[#B95B2A] transition">Contact Us</Link>
+              </div>
           {/* DYNAMIC ROLE-BASED LINKS */}
           {isLoggedIn && userRole === 'admin' && (
             <Link 
