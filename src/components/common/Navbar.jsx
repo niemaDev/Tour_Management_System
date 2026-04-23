@@ -30,13 +30,13 @@ const Navbar = () => {
   };
 
   const destinations = [
-    { name: "Amhara", path: "/destinations/north" },
-    { name: "Oromia", path: "/destinations/central" },
-    { name: "Tigray", path: "/destinations/north-east" },
-    { name: "Afar", path: "/destinations/danakil" },
-    { name: "Southern Nation", path: "/destinations/south" },
-    { name: "More", path: "/tours" }
-  ];
+  { name: "Amhara", path: "/destinations/amhara" },
+  { name: "Oromia", path: "/destinations/oromia" },
+  { name: "Tigray", path: "/destinations/tigray" },
+  { name: "Afar", path: "/destinations/afar" },
+  { name: "Southern Nation", path: "/destinations/south" },
+  { name: "More", path: "/destinations" }
+];
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white shadow-sm">
@@ -83,7 +83,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-8 font-bold text-[#2D1B14] uppercase text-xs tracking-[0.2em]">
           <Link to="/" className="hover:text-[#B95B2A] transition">Home</Link>
-          <Link to="/tours" className="hover:text-[#B95B2A] transition">About</Link>
+          <Link to="/about" className="hover:text-[#B95B2A] transition">About</Link>
         
             <Link to="/tours" className="hover:text-[#B95B2A] transition">Search Tours</Link>
 

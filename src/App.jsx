@@ -12,6 +12,9 @@ import TourDetails from "./pages/TourDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Destinations from "./pages/Destinations";
+import DestinationDetail from "./pages/DestinationDetail";
 
 // User/Admin Pages
 import Dashboard from "./pages/Dashboard";
@@ -33,6 +36,9 @@ function App() {
           <Route path="tour/:id" element={<TourDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="/destinations" element={<Destinations />} />
+          <Route path="/destinations/:regionId" element={<DestinationDetail />} />
+          <Route path="about" element={<About />} />
           <Route path="signup" element={<Register />} />
           
           {/* Protected Customer Routes */}

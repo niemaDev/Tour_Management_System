@@ -10,13 +10,17 @@ const Contact = () => {
     message: '',
     humanVerify: ''
   });
-
+const [error, setError] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+    if(!formData.firstName || !formData.email || !formData.message){
+      setError("Please fill in all required fields before submitting.");
+    return;
+  }
+  setError("");
+  console.log("Form Submitted:", formData);
     alert("Thank you! Your message has been sent.");
-  };
-
+};
   return (
     <div className=" bg-gray-50">
       {/* --- HERO SECTION --- */}
@@ -118,7 +122,11 @@ const Contact = () => {
                   onChange={(e) => setFormData({...formData, humanVerify: e.target.value})}
                 />
               </div>
-
+               {error && (
+              <p className="text-red-500 text-sm font-bold animate-bounce">
+               ⚠️ {error}
+                </p>
+                 )}
               <button className="bg-[#4B2E20] text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-[#D4A017] transition-all transform hover:scale-105 shadow-lg">
                 Submit
               </button>
