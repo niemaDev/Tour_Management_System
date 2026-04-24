@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Public Pages
 import Home from "./pages/Home";
@@ -26,9 +27,11 @@ import Reports from "./pages/admin/Reports";
 function App() {
   return (
     <div className="min-h-screen w-full bg-[#2D1B14] text-white">
+      {/* ✅ CORRECT: ScrollToTop goes HERE, outside of Routes */}
+      <ScrollToTop />
+
       <Routes>
-        
-        {/* 1. PUBLIC & CUSTOMER ROUTES (Uses MainLayout with Navbar/Footer) */}
+        {/* 1. PUBLIC & CUSTOMER ROUTES */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="destinations" element={<Catalog />} />
@@ -36,8 +39,9 @@ function App() {
           <Route path="tour/:id" element={<TourDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="/destinations" element={<Destinations />} />
-          <Route path="/destinations/:regionId" element={<DestinationDetail />} />
+          {/* Note: I removed the leading slash on destinations below to keep nesting consistent */}
+          <Route path="destinations-list" element={<Destinations />} />
+          <Route path="destinations/:regionId" element={<DestinationDetail />} />
           <Route path="about" element={<About />} />
           <Route path="signup" element={<Register />} />
           
@@ -48,17 +52,15 @@ function App() {
           </Route>
         </Route>
 
-        {/* 2. ADMIN ROUTES (Uses AdminLayout with Sidebar) */}
-        {/* We wrap the entire Admin section in a ProtectedRoute for safety */}
+        {/* 2. ADMIN ROUTES */}
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} /> {/* This is /admin */}
-            <Route path="dashboard" element={<AdminDashboard />} /> {/* This is /admin/dashboard */}
-            <Route path="tours" element={<ManageTours />} /> {/* This is /admin/tours */}
-            <Route path="reports" element={<Reports />} />   {/* This is /admin/reports */}
+            <Route index element={<AdminDashboard />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="tours" element={<ManageTours />} />
+            <Route path="reports" element={<Reports />} />
           </Route>
         </Route>
-
       </Routes>
     </div>
   );
