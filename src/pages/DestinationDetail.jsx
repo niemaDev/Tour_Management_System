@@ -12,12 +12,13 @@ const DestinationDetail = () => {
   return (
     <div className="bg-white">
       {/* Dynamic Hero */}
-      <section className="relative h-[70vh] flex items-end">
+      <section className=" flex items-end     bg-[url('/nature.jpg')] bg-cover bg-center h-screen
+      relative min-h-[calc(100vh-214px)]">
         <img src={data.heroImage} className="absolute inset-0 w-full h-full object-cover" alt={data.name} />
         <div className="absolute inset-0 bg-gradient-to-t from-[#4B2E20] via-transparent to-transparent" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 w-full">
-          <Link to="/destinations" className="text-white/70 hover:text-[#D4A017] flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 w-full mb-40">
+          <Link to="/tours" className="text-white/70 hover:text-[#D4A017] flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-6">
             <ArrowLeft size={16} /> Back to All Regions
           </Link>
           <h1 className="text-6xl md:text-8xl font-serif font-bold text-white tracking-tighter leading-none mb-4">

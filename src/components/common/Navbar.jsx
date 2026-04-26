@@ -35,7 +35,7 @@ const Navbar = () => {
   { name: "Tigray", path: "/destinations/tigray" },
   { name: "Afar", path: "/destinations/afar" },
   { name: "Southern Nation", path: "/destinations/south" },
-  { name: "More", path: "/destinations" }
+  
 ];
 
   return (

@@ -7,7 +7,6 @@ import ScrollToTop from "./components/ScrollToTop";
 
 // Public Pages
 import Home from "./pages/Home";
-import Catalog from "./pages/Catalog";
 import Tours from "./pages/Tours";
 import TourDetails from "./pages/TourDetails";
 import Login from "./pages/Login";
@@ -19,10 +18,11 @@ import DestinationDetail from "./pages/DestinationDetail";
 
 // User/Admin Pages
 import Dashboard from "./pages/Dashboard";
-import BookingPage from "./pages/BookingPage";
+import BookingPage from "./pages/BookingPage"
 import AdminDashboard from "./pages/AdminDashboard";
 import ManageTours from "./pages/admin/ManageTours";
 import Reports from "./pages/admin/Reports";
+import BookingMonitor from "./pages/admin/BookingMonitor";
 
 function App() {
   return (
@@ -34,12 +34,10 @@ function App() {
         {/* 1. PUBLIC & CUSTOMER ROUTES */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route path="destinations" element={<Catalog />} />
           <Route path="tours" element={<Tours />} />
           <Route path="tour/:id" element={<TourDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="contact" element={<Contact />} />
-          {/* Note: I removed the leading slash on destinations below to keep nesting consistent */}
           <Route path="destinations-list" element={<Destinations />} />
           <Route path="destinations/:regionId" element={<DestinationDetail />} />
           <Route path="about" element={<About />} />
@@ -48,7 +46,7 @@ function App() {
           {/* Protected Customer Routes */}
           <Route element={<ProtectedRoute allowedRoles={['customer', 'admin']} />}>
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="booking" element={<BookingPage />} />
+           <Route path="booking" element={<BookingPage />} />
           </Route>
         </Route>
 
@@ -59,6 +57,7 @@ function App() {
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="tours" element={<ManageTours />} />
             <Route path="reports" element={<Reports />} />
+            <Route path="bookings" element={<BookingMonitor />} />
           </Route>
         </Route>
       </Routes>

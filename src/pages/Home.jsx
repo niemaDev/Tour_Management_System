@@ -109,19 +109,23 @@ const Home = () => {
             <h2 className="text-4xl font-serif font-bold text-[#4B2E20]">Explore <span className="text-[#D4A017]">Top Places</span></h2>
             <p className="text-neutral-500 mt-2">Discover the most breathtaking destinations</p>
           </div>
-          <Link to="/destinations" className="text-[#D4A017] font-bold flex items-center gap-2 hover:translate-x-2 transition-transform">
+          <Link to="/tours" className="text-[#D4A017] font-bold flex items-center gap-2 hover:translate-x-2 transition-transform">
             See All Places <ArrowRight size={20} />
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
-          <TopPlaceCard img="/lalibela.jpg" name="Lalibela" tours="12 Tours" />
+          <TopPlaceCard img="/alnejashi.jpg" name="Al-Nejashi" tours="12 Tours" />
           <TopPlaceCard img="/terara.jpg" name="Simien Mountains" tours="8 Tours" />
-          <TopPlaceCard img="/geter.jpg" name="Geter" tours="15 Tours" />
+          <TopPlaceCard img="/walya.jpg" name="Gambella National Park" tours="15 Tours" />
         </div>
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto mt-16 ">
+
           <TopPlaceCard img="/tissabay.jpg" name="TissAbay " tours="12 Tours" />
+
           <TopPlaceCard img="/gonder.jpg" name="Gonder" tours="8 Tours" />
+
           <TopPlaceCard img="/camel.jpg" name="Afar" tours="15 Tours" />
+
         </div>
       </section>
 

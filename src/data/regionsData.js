@@ -20,7 +20,7 @@ export const regionsData = {
   tigray: {
     name: "Tigray Region",
     tagline: "The Gateway to Antiquity",
-    heroImage: "/colored.jpg",
+    heroImage: "/alnejashi.jpg",
     description: "The birthplace of the Axumite Empire and home to hidden cliff-side monasteries.",
     longDescription: "Tigray holds the keys to Ethiopia's ancient history. Axum was the center of one of the four great empires of the ancient world. The Gheralta Mountains offer adventurous trekking leading to ancient churches carved high into vertical rock faces, offering breathtaking views.",
     highlights: ["Obelisks of Axum", "Gheralta Rock Churches", "Al-Negashi Mosque", "Temple of Yeha"],
@@ -29,7 +29,7 @@ export const regionsData = {
   afar: {
     name: "Afar Region",
     tagline: "Journey to the Danakil",
-    heroImage: "/colored.jpg",
+    heroImage: "/camel.jpg",
     description: "One of the lowest and hottest places on Earth, filled with volcanic wonders.",
     longDescription: "The Afar region is home to the Danakil Depression, where you can see bubbling lava lakes at Erta Ale and neon-colored sulfur springs at Dallol. It is also a paleoanthropological treasure trove where 'Lucy,' our 3.2 million-year-old ancestor, was discovered.",
     highlights: ["Erta Ale Volcano", "Dallol Sulfur Springs", "Lake Assal (Salt Lake)", "Hadar Hominid Site"],
