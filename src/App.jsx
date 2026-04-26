@@ -26,12 +26,18 @@ import BookingMonitor from "./pages/admin/BookingMonitor";
 
 function App() {
   return (
-    <div className="min-h-screen w-full bg-[#2D1B14] text-white">
-      {/* ✅ CORRECT: ScrollToTop goes HERE, outside of Routes */}
+    /* Key Changes:
+       - added 'flex flex-col' to ensure layouts can fill the vertical space correctly.
+       - added 'overflow-x-hidden' to prevent a single wide element from breaking mobile zoom.
+    */
+    <div className="min-h-screen w-full flex flex-col bg-[#F8F9FA] text-[#2D1B14] overflow-x-hidden">
+      
+      {/* Ensures page starts at top on every route change */}
       <ScrollToTop />
 
       <Routes>
         {/* 1. PUBLIC & CUSTOMER ROUTES */}
+        {/* MainLayout handles the responsive Top Navbar */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="tours" element={<Tours />} />
@@ -46,11 +52,12 @@ function App() {
           {/* Protected Customer Routes */}
           <Route element={<ProtectedRoute allowedRoles={['customer', 'admin']} />}>
             <Route path="dashboard" element={<Dashboard />} />
-           <Route path="booking" element={<BookingPage />} />
+            <Route path="booking" element={<BookingPage />} />
           </Route>
         </Route>
 
         {/* 2. ADMIN ROUTES */}
+        {/* AdminLayout handles the Mobile Toggle Sidebar */}
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />

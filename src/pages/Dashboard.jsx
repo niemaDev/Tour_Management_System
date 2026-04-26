@@ -1,24 +1,27 @@
 import React from 'react';
 import { Calendar, MapPin, Clock, Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 
 const Dashboard = () => {
+  const navigate = useNavigate(); // 2. Initialize the hook
+
   // Mock data for the user's bookings
   const myBookings = [
     {
       id: 1,
-      tour: "Simien Mountains Trekking",
+      tour: "Tiss Abay Water Fall",
       date: "Oct 15, 2026",
       status: "Confirmed",
       price: "12,000 ETB",
-      image: "/images/simien.jpg"
+      image: "/tissabay.jpg"
     },
     {
       id: 2,
-      tour: "Lalibela Rock-Hewn Churches",
+      tour: "Gonder Fasiledes",
       date: "Dec 05, 2026",
       status: "Pending",
       price: "8,500 ETB",
-      image: "/images/lalibela.jpg"
+      image: "/gonder.jpg"
     }
   ];
 
@@ -89,7 +92,12 @@ const Dashboard = () => {
                   <span className="font-bold text-xl text-[#B95B2A]">2,450</span>
                 </div>
                 <hr className="border-white/10" />
-                <button className="w-full bg-[#B95B2A] py-3 rounded-xl font-bold text-sm hover:bg-[#a34f25] transition">
+                
+                {/* 3. Added the onClick Handler */}
+                <button 
+                  onClick={() => navigate('/booking')} 
+                  className="w-full bg-[#B95B2A] py-4 rounded-xl font-bold text-sm hover:bg-[#a34f25] transition shadow-lg active:scale-95 transition-transform"
+                >
                   Book New Tour
                 </button>
               </div>
