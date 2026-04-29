@@ -44,7 +44,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-[100] bg-white shadow-sm font-sans">
-      {/* --- TOP BAR --- */}
+      
       <div className="border-b border-gray-100 hidden lg:block bg-gray-50/50">
         <div className="max-w-7xl mx-auto px-8 h-10 flex items-center justify-between">
           <div className="flex items-center gap-4 text-gray-400">
@@ -64,14 +64,14 @@ const Navbar = () => {
               </>
             ) : (
               <button onClick={handleLogout} className="text-red-400 hover:text-red-600 transition-colors flex items-center gap-1">
-                <LogOut size={12} /> Logout
+                <LogOut size={12} /> Signout
               </button>
             )}
           </div>
         </div>
       </div>
 
-      {/* --- MAIN NAVBAR --- */}
+      
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-[74px] flex items-center justify-between">
         {/* 2. Updated Branding Section with Image Logo */}
         <Link to="/" className="shrink-0 flex items-center gap-2 group">
@@ -90,12 +90,10 @@ const Navbar = () => {
     group-hover:scale-105
   " 
 />
-         {/* <span className="hidden sm:block text-xl lg:text-2xl font-black tracking-tighter uppercase text-[#2D1B14]">
-            Habesha<span className="text-[#B95B2A]">Tour</span>
-          </span>  */}
+    
         </Link>
 
-        {/* Desktop Navigation */}
+       
         <div className="hidden lg:flex items-center gap-8 font-bold text-[#2D1B14] uppercase text-[11px] tracking-widest">
           <Link to="/" className="hover:text-[#B95B2A] transition-colors">Home</Link>
           <Link to="/tours" className="hover:text-[#B95B2A] transition-colors">Tours</Link>
@@ -142,7 +140,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* --- MOBILE MENU OVERLAY --- */}
+      
       <div className={`lg:hidden fixed inset-0 top-[74px] bg-white z-[90] transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col p-8 space-y-6 font-bold text-[#2D1B14] uppercase tracking-widest h-full overflow-y-auto pb-32">
           {/* Logo in Mobile Menu */}
@@ -181,7 +179,7 @@ const Navbar = () => {
                   Go to Dashboard
                 </Link>
                 <button onClick={handleLogout} className="w-full bg-red-50 text-red-500 text-center py-4 rounded-2xl">
-                  Logout
+                  Signout
                 </button>
               </div>
             )}

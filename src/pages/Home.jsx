@@ -38,7 +38,7 @@ const Home = () => {
       setCurrent(prev => (prev === slides.length - 1 ? 0 : prev + 1));
     }, 5000);
     return () => clearInterval(timer);
-  }, [current]);
+  }, []);
 
   const nextSlide = () => setCurrent(current === slides.length - 1 ? 0 : current + 1);
   const prevSlide = () => setCurrent(current === 0 ? slides.length - 1 : current - 1);
@@ -46,7 +46,7 @@ const Home = () => {
   return (
     <div className="bg-white font-sans overflow-x-hidden">
       
-      {/* --- HERO SECTION --- */}
+    
       <section className="relative min-h-[70vh] md:h-[90vh] w-full bg-neutral-900">
         {slides.map((slide, index) => (
           <div 
@@ -74,7 +74,6 @@ const Home = () => {
           </div>
         ))}
         
-        {/* Desktop Navigation Arrows (Hidden on Mobile) */}
         <button onClick={prevSlide} className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-40 p-4 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-[#D4A017] transition-all">
           <ChevronLeft size={32} />
         </button>
@@ -83,7 +82,7 @@ const Home = () => {
         </button>
       </section>
 
-      {/* --- PLAN YOUR TRIP --- */}
+      
       <section className="py-16 md:py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#4B2E20] mb-4">Plan Your <span className="text-[#D4A017]">Perfect Trip</span></h2>
@@ -98,7 +97,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- EXPLORE TOP PLACES --- */}
+      {/*  EXPLORE TOP PLACES */}
       <section className="py-16 md:py-24 bg-neutral-50 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-4 text-center md:text-left">
           <div>
@@ -110,7 +109,6 @@ const Home = () => {
           </Link>
         </div>
         
-        {/* Grid remains responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 max-w-7xl mx-auto">
           <TopPlaceCard img="/alnejashi.jpg" name="Al-Nejashi" tours="12 Tours" />
           <TopPlaceCard img="/terara.jpg" name="Simien Mountains" tours="8 Tours" />
@@ -121,7 +119,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- WHY CHOOSE US --- */}
+      {/*  WHY CHOOSE US  */}
       <section className="py-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="relative">
           <img 
@@ -149,7 +147,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- GET STARTED --- */}
       <section className="py-20 md:py-28 px-6 text-center bg-[#4B2E20] text-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">Get Started with <br/><span className="text-[#D4A017]">Habesha Tour</span></h2>

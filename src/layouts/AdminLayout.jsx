@@ -66,7 +66,7 @@ const AdminLayout = () => {
             {isCollapsed ? (
               <span className="text-[#B95B2A] hidden lg:block">EA</span>
             ) : (
-              <div className="flex items-center">Ethio<span className="text-[#B95B2A]">Admin</span></div>
+              <div className="flex items-center">TOUR<span className="text-[#B95B2A]">Admin</span></div>
             )}
           </span>
           {/* Mobile Close Button */}

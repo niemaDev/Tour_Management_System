@@ -4,13 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
-  
-  // 1. STATE FOR FORM INPUTS
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  // 2. LOGIN HANDLER
   const handleLogin = (e) => {
     e.preventDefault();
      console.log("Login clicked with:", email); // Add this to test if it's working!
@@ -23,14 +20,12 @@ const Login = () => {
       setTimeout(() => {
       window.location.href = '/admin'; // This is a "hard" redirect to bypass route issues
     }, 100);
-      //navigate('/admin');
-     // alert("Role saved! Current role in storage: " + localStorage.getItem('userRole'));
-    //navigate('/admin');
+      
     } else {
-      // If it's a regular traveler
+      
       localStorage.setItem('userRole', 'customer');
       localStorage.setItem('isLoggedIn', 'true');
-      navigate('/dashboard'); // Redirect to Home or Tours
+      navigate('/dashboard'); 
     }
   };
 
@@ -74,9 +69,7 @@ const Login = () => {
               <label className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#2D1B14]">
                 Password
               </label>
-              <button type="button" className="text-[10px] font-bold text-[#B95B2A] hover:underline">
-                Forgot Password?
-              </button>
+             
             </div>
             <div className="relative group">
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#B95B2A] transition-colors">
@@ -109,6 +102,9 @@ const Login = () => {
             <label htmlFor="remember" className="text-xs font-medium text-gray-500 cursor-pointer">
               Remember me
             </label>
+             <button type="button" className="text-[10px] font-bold text-[#B95B2A] hover:underline pl-30">
+                Forgot Password?
+              </button>
           </div>
 
           <button 
