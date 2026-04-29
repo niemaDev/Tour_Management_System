@@ -25,7 +25,7 @@ const Home = () => {
     {
       id: 3,
       image: "/nature.jpg", 
-      welcome: "Cultural Heritage",
+      welcome: "living Museum",
       title: "The Spirit of Omo Valley",
       subtitle: "Meet the vibrant tribes and traditions of Southern Ethiopia."
     }

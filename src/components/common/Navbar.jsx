@@ -5,7 +5,6 @@ import {
   Facebook, Linkedin, Instagram, Briefcase, Menu, X
 } from 'lucide-react';
 
-// 1. Import your logo file (Ensure the path matches your project structure)
 import logo from '../../assets/habesha-logo.jpg'; 
 
 const Navbar = () => {

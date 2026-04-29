@@ -15,12 +15,11 @@
     /* Set base font size for better mobile readability */
     font-size: 16px;
     -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
   }
 
   body {
     /* Prevent bouncing effect on mobile browsers */
-    overscroll-behavior-y: none;
+    
     @apply bg-white text-coffee font-sans; 
     
     margin: 0;
@@ -48,6 +47,12 @@
     height: auto;
     display: block;
   }
+  /* Prevent the entire page from bouncing */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-y: none; /* This removes the bounce/pull-to-refresh effect */
+}
 }
 
 /* Custom Scrollbar for a premium look (Desktop only) */

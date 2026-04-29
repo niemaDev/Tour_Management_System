@@ -31,7 +31,7 @@ const Dashboard = () => {
         
         {/* Welcome Header */}
         <header className="mb-10">
-          <h1 className="text-3xl font-bold text-[#2D1B14]">Hello, Nimet! </h1>
+          <h1 className="text-3xl font-bold text-[#2D1B14]">Hello, There! </h1>
           <p className="text-gray-500">Ready for your next Ethiopian adventure?</p>
         </header>
 
