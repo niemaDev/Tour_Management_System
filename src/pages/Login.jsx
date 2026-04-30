@@ -8,24 +8,42 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-     console.log("Login clicked with:", email); // Add this to test if it's working!
-    // MOCK AUTHENTICATION LOGIC
-    // In a real app, you would fetch this from your database
-    if (email === "admin@ethiopath.com") {
-      // If it's the admin email, save info and go to Admin Dashboard
-      localStorage.setItem('userRole', 'admin');
-      localStorage.setItem('isLoggedIn', 'true');
-      setTimeout(() => {
-      window.location.href = '/admin'; // This is a "hard" redirect to bypass route issues
-    }, 100);
-      
-    } else {
-      
-      localStorage.setItem('userRole', 'customer');
-      localStorage.setItem('isLoggedIn', 'true');
-      navigate('/dashboard'); 
+    
+    try {
+      // 1. Send the login request to PHP
+      const response = await fetch('http://localhost/habesha-backend/login.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        // 2. Success! Save user details to LocalStorage
+        localStorage.setItem('userRole', result.user.role);
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userName', result.user.fullName);
+
+        // 3. Direct based on role
+        if (result.user.role === 'admin') {
+          alert("Welcome Admin!");
+          window.location.href = '/admin'; 
+        } else {
+          alert("Welcome back, " + result.user.fullName);
+          navigate('/dashboard'); 
+        }
+      } else {
+        // 4. Show error from PHP (e.g., "Invalid password" or "User not found")
+        alert(result.error);
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      alert("Cannot connect to server. Ensure XAMPP is running!");
     }
   };
 

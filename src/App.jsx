@@ -18,6 +18,7 @@ import DestinationDetail from "./pages/DestinationDetail";
 
 // User/Admin Pages
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import BookingPage from "./pages/BookingPage"
 import AdminDashboard from "./pages/AdminDashboard";
 import ManageTours from "./pages/admin/ManageTours";
@@ -47,6 +48,7 @@ function App() {
           <Route element={<ProtectedRoute allowedRoles={['customer', 'admin']} />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="booking" element={<BookingPage />} />
+            <Route path="profile" element={<Profile/>} />
           </Route>
         </Route>
 

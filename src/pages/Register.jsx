@@ -12,14 +12,13 @@ const Register = () => {
     confirmPassword: '',
   });
 
-  // State to hold error messages for each field
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // Clear the specific error when the user starts typing again
     if (errors[e.target.name]) {
       setErrors(prev => ({ ...prev, [e.target.name]: "" }));
     }
@@ -30,39 +29,45 @@ const Register = () => {
     setErrors({});
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = {};
 
-    // 1. Full Name Validation
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "Write your full name";
-    }
+    if (!formData.fullName.trim()) newErrors.fullName = "Write your full name";
+    if (!formData.email.includes('@')) newErrors.email = "Write your correct gmail form";
+    if (formData.password.length < 6) newErrors.password = "Minimum 6 characters";
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match!";
 
-    // 2. Email Validation
-    if (!formData.email.includes('@')) {
-      newErrors.email = "Write your correct gmail form";
-    }
-
-    // 3. Password Validation
-    if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    }
-
-    // 4. Match Validation
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match!";
-    }
-
-    // If there are errors, stop and show them
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    // Success logic
-    console.log("Success:", formData);
-    navigate('/dashboard');
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost/habesha-backend/register.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          password: formData.password
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+        navigate('/login');
+      } else {
+        setErrors({ email: result.error || "Registration failed" });
+      }
+    } catch (error) {
+      alert("Server connection failed. Is XAMPP running?");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -82,74 +87,50 @@ const Register = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="w-full space-y-4">
-          
-          {/* Full Name */}
           <div className="space-y-1">
             <label className="block text-[10px] font-bold text-[#2D1B14] ml-1 uppercase tracking-[0.15em]">Full Name</label>
             <div className="relative">
               <User className={`absolute left-4 top-1/2 -translate-y-1/2 ${errors.fullName ? 'text-red-500' : 'text-[#B95B2A]'}`} size={16} />
-              <input 
-                type="text" name="fullName" value={formData.fullName} onChange={handleChange}
-                placeholder="Enter your name" 
-                className={`w-full pl-11 pr-4 py-3 bg-gray-50 border rounded-xl outline-none transition text-sm ${errors.fullName ? 'border-red-500 ring-1 ring-red-200' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`}
-              />
+              <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter your name" className={`w-full pl-11 pr-4 py-3 bg-gray-50 border rounded-xl outline-none text-sm ${errors.fullName ? 'border-red-500' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`} />
             </div>
-            {errors.fullName && <p className="text-[10px] text-red-500 font-bold ml-1 animate-pulse italic">{errors.fullName}</p>}
+            {errors.fullName && <p className="text-[10px] text-red-500 font-bold ml-1 italic">{errors.fullName}</p>}
           </div>
 
-          {/* Email Address */}
           <div className="space-y-1">
             <label className="block text-[10px] font-bold text-[#2D1B14] ml-1 uppercase tracking-[0.15em]">Email Address</label>
             <div className="relative">
               <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 ${errors.email ? 'text-red-500' : 'text-[#B95B2A]'}`} size={16} />
-              <input 
-                type="text" name="email" value={formData.email} onChange={handleChange}
-                placeholder="your@email.com" 
-                className={`w-full pl-11 pr-4 py-3 bg-gray-50 border rounded-xl outline-none transition text-sm ${errors.email ? 'border-red-500 ring-1 ring-red-200' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`}
-              />
+              <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" className={`w-full pl-11 pr-4 py-3 bg-gray-50 border rounded-xl outline-none text-sm ${errors.email ? 'border-red-500' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`} />
             </div>
-            {errors.email && <p className="text-[10px] text-red-500 font-bold ml-1 animate-pulse italic">{errors.email}</p>}
+            {errors.email && <p className="text-[10px] text-red-500 font-bold ml-1 italic">{errors.email}</p>}
           </div>
 
-          {/* Password */}
           <div className="space-y-1">
             <label className="block text-[10px] font-bold text-[#2D1B14] ml-1 uppercase tracking-[0.15em]">Password</label>
             <div className="relative">
               <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 ${errors.password ? 'text-red-500' : 'text-[#B95B2A]'}`} size={16} />
-              <input 
-                type={showPassword ? "text" : "password"} 
-                name="password" value={formData.password} onChange={handleChange}
-                placeholder="Create Password" 
-                className={`w-full pl-11 pr-12 py-3 bg-gray-50 border rounded-xl outline-none transition text-sm ${errors.password ? 'border-red-500 ring-1 ring-red-200' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`}
-              />
+              <input type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} placeholder="Create Password" className={`w-full pl-11 pr-12 py-3 bg-gray-50 border rounded-xl outline-none text-sm ${errors.password ? 'border-red-500' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`} />
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
-            {errors.password && <p className="text-[10px] text-red-500 font-bold ml-1 animate-pulse italic">{errors.password}</p>}
           </div>
 
-          {/* Confirm Password */}
           <div className="space-y-1">
             <label className="block text-[10px] font-bold text-[#2D1B14] ml-1 uppercase tracking-[0.15em]">Confirm Password</label>
             <div className="relative">
               <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 ${errors.confirmPassword ? 'text-red-500' : 'text-[#B95B2A]'}`} size={16} />
-              <input 
-                type={showConfirmPassword ? "text" : "password"} 
-                name="confirmPassword" value={formData.confirmPassword} onChange={handleChange}
-                placeholder="Repeat Password" 
-                className={`w-full pl-11 pr-12 py-3 bg-gray-50 border rounded-xl outline-none transition text-sm ${errors.confirmPassword ? 'border-red-500 ring-1 ring-red-200' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`}
-              />
+              <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Repeat Password" className={`w-full pl-11 pr-12 py-3 bg-gray-50 border rounded-xl outline-none text-sm ${errors.confirmPassword ? 'border-red-500' : 'border-gray-100 focus:ring-2 focus:ring-[#B95B2A]/20'}`} />
               <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
                 {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
-            {errors.confirmPassword && <p className="text-[10px] text-red-500 font-bold ml-1 animate-pulse italic">{errors.confirmPassword}</p>}
+            {errors.confirmPassword && <p className="text-[10px] text-red-500 font-bold ml-1 italic">{errors.confirmPassword}</p>}
           </div>
 
           <div className="flex gap-3 mt-8">
-            <button type="submit" className="flex-[2] bg-[#B95B2A] text-white py-4 rounded-xl font-bold text-xs shadow-lg hover:brightness-110 active:scale-[0.98] transition flex items-center justify-center gap-2 uppercase tracking-widest">
-              Create Account <ArrowRight size={16} />
+            <button type="submit" disabled={loading} className="flex-[2] bg-[#B95B2A] text-white py-4 rounded-xl font-bold text-xs shadow-lg hover:brightness-110 transition flex items-center justify-center gap-2 uppercase tracking-widest">
+              {loading ? "Creating..." : "Create Account"} <ArrowRight size={16} />
             </button>
 
             <button type="button" onClick={handleClear} className="flex-1 bg-gray-100 text-gray-500 py-4 rounded-xl font-bold text-xs hover:bg-gray-200 transition flex items-center justify-center gap-2 uppercase tracking-widest">
