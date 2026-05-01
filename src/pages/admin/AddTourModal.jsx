@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { X, Upload, Save } from 'lucide-react';
+import { X, Save, Loader2 } from 'lucide-react';
 
-const AddTourModal = ({ isOpen, onClose }) => {
-  // 1. Initial State for the form
+const AddTourModal = ({ isOpen, onClose, onTourAdded }) => {
   const initialState = {
     name: '',
     region: 'Amhara',
@@ -10,41 +9,46 @@ const AddTourModal = ({ isOpen, onClose }) => {
     duration: '',
     capacity: '',
     description: '',
-    image: null
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [loading, setLoading] = useState(false);
 
-  // 2. Handle Input Changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  try {
-    const response = await fetch('http://localhost/habesha-backend/add_tour.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+    e.preventDefault();
+    setLoading(true);
 
-    const result = await response.json();
+    try {
+      const response = await fetch('http://localhost/habesha-backend/add_tour.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    if (result.message) {
-      alert(result.message);
-      setFormData(initialState);
-      onClose();
-      // Optional: window.location.reload(); to show new data in ManageTours
-    } else {
-      alert("Error: " + result.error);
+      const result = await response.json();
+
+      if (result.success) {
+        alert(result.message || "Tour Saved!");
+        setFormData(initialState);
+
+    onTourAdded(); // Refresh table in ManageTours
+        onClose();
+      } else {
+        alert("Error: " + (result.error || "Failed to save tour."));
+      }
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("Server error. Please check if XAMPP is running.");
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("Submission failed:", error);
-  }
-};
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -55,8 +59,6 @@ const AddTourModal = ({ isOpen, onClose }) => {
       ></div>
       
       <div className="relative bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-        
-        {/* Header */}
         <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
           <div>
             <h2 className="text-2xl font-serif font-bold text-[#2D1B14]">Add New Tour</h2>
@@ -67,10 +69,8 @@ const AddTourModal = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Form Body */}
         <form id="tourForm" onSubmit={handleSubmit} className="p-8 max-h-[65vh] overflow-y-auto custom-scrollbar">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
             <div className="md:col-span-2">
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tour Name</label>
               <input 
@@ -80,7 +80,7 @@ const AddTourModal = ({ isOpen, onClose }) => {
                 required
                 type="text" 
                 placeholder="e.g. Lalibela Rock-Hewn Churches" 
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-coffee transition focus:border-[#B95B2A]/30" 
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-[#2D1B14] transition focus:border-[#B95B2A]/30" 
               />
             </div>
 
@@ -90,7 +90,7 @@ const AddTourModal = ({ isOpen, onClose }) => {
                 name="region"
                 value={formData.region}
                 onChange={handleChange}
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-coffee cursor-pointer"
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-[#2D1B14] cursor-pointer"
               >
                 <option>Amhara</option>
                 <option>Oromia</option>
@@ -109,7 +109,7 @@ const AddTourModal = ({ isOpen, onClose }) => {
                 required
                 type="number" 
                 placeholder="45000" 
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-coffee" 
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-[#2D1B14]" 
               />
             </div>
 
@@ -122,7 +122,7 @@ const AddTourModal = ({ isOpen, onClose }) => {
                 required
                 type="text" 
                 placeholder="e.g. 3 Days / 2 Nights" 
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-coffee" 
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-[#2D1B14]" 
               />
             </div>
 
@@ -135,7 +135,7 @@ const AddTourModal = ({ isOpen, onClose }) => {
                 required
                 type="number" 
                 placeholder="15" 
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-coffee" 
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-[#2D1B14]" 
               />
             </div>
 
@@ -147,13 +147,12 @@ const AddTourModal = ({ isOpen, onClose }) => {
                 onChange={handleChange}
                 rows="3"
                 placeholder="Briefly describe the tour highlights..." 
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-coffee resize-none"
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none font-medium text-[#2D1B14] resize-none"
               ></textarea>
             </div>
           </div>
         </form>
 
-        {/* Footer Actions */}
         <div className="p-8 bg-gray-50/50 flex gap-4">
           <button 
             type="button"
@@ -163,11 +162,13 @@ const AddTourModal = ({ isOpen, onClose }) => {
             Discard
           </button>
           <button 
-            form="tourForm" // Connects button to the form id
+            form="tourForm"
             type="submit"
-            className="flex-1 py-4 bg-[#B95B2A] text-white rounded-2xl font-bold shadow-lg shadow-[#B95B2A]/30 flex items-center justify-center gap-2 hover:brightness-110 transition"
+            disabled={loading}
+            className="flex-1 py-4 bg-[#B95B2A] text-white rounded-2xl font-bold shadow-lg shadow-[#B95B2A]/30 flex items-center justify-center gap-2 hover:brightness-110 transition disabled:opacity-50"
           >
-            <Save size={20} /> Save Tour
+            {loading ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
+            {loading ? "Saving..." : "Save Tour"}
           </button>
         </div>
       </div>

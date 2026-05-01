@@ -116,7 +116,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
-
+           <Link to="/about" className="hover:text-[#B95B2A] transition-colors">About Us</Link>
           <Link to="/contact" className="hover:text-[#B95B2A] transition-colors">Contact</Link>
           
           {isLoggedIn && (
