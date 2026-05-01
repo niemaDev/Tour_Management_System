@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Added useEffect import
 import { Search, Filter, Plus, Edit, Trash2 } from 'lucide-react';
 import AddTourModal from './AddTourModal';
 
 const ManageTours = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tours, setTours] = useState([]); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Added missing modal state
 
-  const tours = [
-    { id: 1, name: "Simien Mountains Trek", region: "Amhara", duration: "7 Days", price: "45,000 ETB", maxPeople: 12, status: "Active" },
-    { id: 2, name: "Omo Valley Safari", region: "Southern Nations", duration: "5 Days", price: "38,000 ETB", maxPeople: 8, status: "Active" },
-    { id: 3, name: "Historic Northern Route", region: "Tigray", duration: "10 Days", price: "52,000 ETB", maxPeople: 15, status: "Active" },
-    { id: 4, name: "Lalibela Churches Tour", region: "Amhara", duration: "4 Days", price: "28,000 ETB", maxPeople: 20, status: "Active" },
-  ];
+  // Function to get data from PHP
+  const fetchTours = async () => {
+    try {
+      const response = await fetch('http://localhost/habesha-backend/get_all_tours.php');
+      const data = await response.json();
+      setTours(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching tours:", error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTours();
+  }, []);
+
+  // Use a loading spinner or message if data is still fetching
+  if (isLoading) {
+    return <div className="p-8 text-center text-coffee font-bold">Loading Tours...</div>;
+  }
 
   return (
     <div className="p-8">
@@ -68,6 +85,12 @@ const ManageTours = () => {
             ))}
           </tbody>
         </table>
+        
+        {tours.length === 0 && (
+          <div className="py-10 text-center text-gray-400 font-medium">
+            No tours available. Click "Add Tour" to create one.
+          </div>
+        )}
       </div>
     </div>
   );

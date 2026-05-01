@@ -21,21 +21,30 @@ const AddTourModal = ({ isOpen, onClose }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // 3. Handle Form Submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // For now, we'll just log the data. 
-    // Later, you can replace this with your fetch/axios POST request to your MERN backend.
-    console.log("Saving New Tour:", formData);
-    
-    alert(`Tour "${formData.name}" added successfully!`);
-    
-    // Reset form and close
-    setFormData(initialState);
-    onClose();
-  };
+  e.preventDefault();
+  
+  try {
+    const response = await fetch('http://localhost/habesha-backend/add_tour.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
 
+    const result = await response.json();
+
+    if (result.message) {
+      alert(result.message);
+      setFormData(initialState);
+      onClose();
+      // Optional: window.location.reload(); to show new data in ManageTours
+    } else {
+      alert("Error: " + result.error);
+    }
+  } catch (error) {
+    console.error("Submission failed:", error);
+  }
+};
   if (!isOpen) return null;
 
   return (
